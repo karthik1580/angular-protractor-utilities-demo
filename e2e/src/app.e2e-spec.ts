@@ -8,13 +8,10 @@ describe('workspace-project App', () => {
     page = new TodosPage();
   });
 
-  it('should display 2 todo items', (done) => {
+  it('should display 2 todo items', async (done) => {
     page.navigateTo();
-    // const count = await page.getTodos().count();
-    page.getTodos().count().then((res) => {
-      ExpectHelper.expectOrRetry(() => res === 2).then(() => {
-        done();
-      });
-    });
+    const res = await page.getTodos().count();
+    await ExpectHelper.expectOrRetry(() => res === 2);
+    done();
   });
 });
